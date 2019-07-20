@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { Button, Icon, Input, Modal } from "flwww"
 
+const { ipcRenderer } = window.require('electron')
+
 
 
 export default ({ lastNumberSelected }) => {
@@ -49,7 +51,7 @@ export default ({ lastNumberSelected }) => {
           round
           outlined
           type="danger"
-          onClick={() => {}}
+          onClick={() => ipcRenderer.send('close')}
         >
           Salir de BinDOU
         </Button>

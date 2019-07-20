@@ -2,7 +2,10 @@
   "name": "bindou",
   "version": "0.1.0",
   "private": true,
+  "main": "public/electron.js",
+  "homepage": ".",
   "dependencies": {
+    "electron-is-dev": "^1.1.0",
     "flwww": "^1.0.23",
     "lodash": "^4.17.15",
     "node-sass": "^4.12.0",
@@ -14,7 +17,31 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "electron-dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
+    "preelectron-pack": "yarn build",
+    "electron-pack": "electron-builder",
+    "postinstall": "electron-builder install-app-deps"
+  },
+  "author": {
+    "name": "JuanM04",
+    "email": "me@juanm04.com",
+    "url": "https://juanm04.com"
+  },
+  "build": {
+    "appId": "com.juanm04.bindou",
+    "productName": "BinDOU",
+    "copyright": "Copyright © 2019 ${author}",
+    "mac": {
+      "category": "public.app-category.utilities"
+    },
+    "files": [
+      "build/**/*",
+      "node_modules/**/*"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    }
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -30,5 +57,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "concurrently": "^4.1.1",
+    "electron": "^5.0.7",
+    "electron-builder": "^21.1.1",
+    "wait-on": "^3.3.0"
   }
 }
