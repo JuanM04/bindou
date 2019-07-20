@@ -1,0 +1,84 @@
+@import url('/fonts/lato.css')
+
+
+
+body
+  margin: 0
+  font-family: 'Lato', sans-serif
+
+#root
+  width: 100vw
+  height: 100vh
+  display: flex
+  flex-direction: row
+  background-color: #fafafa
+
+
+
+
+.Numbers
+  width: 67vw
+  height: 100%
+  display: grid
+  grid-template: repeat(9, 1fr) / repeat(10, 1fr)
+
+.Number
+  display: flex
+  justify-content: center
+  align-content: center
+  border-top: 1px solid #e0e0e0
+  border-left: 1px solid #e0e0e0
+  cursor: pointer
+
+  &:hover
+    span
+      opacity: .5 !important
+      font-size: 7.5vh
+
+  span
+    margin: auto
+    font-size: 6.7vh
+    font-weight: 100
+    opacity: .25
+    transition: .15s
+
+
+    &.selected
+      font-weight: 700
+      opacity: 1
+
+
+
+
+.Control
+  width: 33vw
+  display: grid
+  grid-template-rows: 1fr 3fr 2fr
+  background-color: #212121
+  color: white
+
+  h1, h2
+    margin: auto
+    text-align: center
+
+  h1
+    word-wrap: break-word
+    width: 25vw
+    font-size: 4vh
+    font-weight: 300
+    font-style: italic
+
+  h2
+    font-weight: 900
+    font-size: 30vh
+  
+  footer
+    display: flex
+    justify-content: center
+    align-items: flex-end
+    padding-bottom: 15px
+
+
+
+button span
+  vertical-align: middle !important
