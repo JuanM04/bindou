@@ -3,31 +3,28 @@ import _range from 'lodash/range'
 
 import Number from './Number'
 
-
-
-export default ({ numbersSelected, setNumbersSelected }) => {
+export default ({ numbersSelected, setNumbersSelected, tts }) => {
   function handleSelected(n, selected) {
-    if(selected) {
-      let arr = [...numbersSelected]  // Inmutability :)
+    if (selected) {
+      let arr = [...numbersSelected] // Inmutability :)
       arr.splice(arr.indexOf(n), 1)
       setNumbersSelected(arr)
     } else {
+      tts(n)
       setNumbersSelected(numbersSelected.concat(n))
     }
   }
 
-
-
-  return(
+  return (
     <div className="Numbers">
-      { _range(1, 90+1).map(n => (
+      {_range(1, 90 + 1).map(n => (
         <Number
           key={n}
           n={n}
           selected={numbersSelected.indexOf(n) !== -1}
           handleSelected={handleSelected}
         />
-      )) }
+      ))}
     </div>
   )
 }

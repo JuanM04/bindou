@@ -1,21 +1,20 @@
 import React, { useState } from 'react'
-import { Button, Icon, Input, Modal } from "flwww"
+import { Button, Icon, Input, Modal, Dropdown } from 'flwww'
 
 const { ipcRenderer } = window.require('electron')
 
-
-
-export default ({ lastNumberSelected }) => {
+export default ({ lastNumberSelected, currentVoice, setCurrentVoice }) => {
   const [modalIsVisible, setModalIsVisible] = useState(false)
   const [title, setTitle] = useState('BinDOU')
+  const voices = window.speechSynthesis
+    .getVoices()
+    .filter(voice => voice.lang.startsWith('es'))
 
   function toggleModal() {
     setModalIsVisible(!modalIsVisible)
   }
 
-
-
-  return(
+  return (
     <div className="Control">
       <h1>{title}</h1>
 
@@ -24,19 +23,14 @@ export default ({ lastNumberSelected }) => {
       <footer>
         <Button
           round
-          colors={{ mainColor: "#fff", secondColor: "#212121" }}
+          colors={{ mainColor: '#fff', secondColor: '#212121' }}
           onClick={toggleModal}
         >
           <Icon type="settings" /> Configuración
         </Button>
       </footer>
 
-
-
-      <Modal
-        isVisible={modalIsVisible}
-        toggleModal={toggleModal}
-      >
+      <Modal isVisible={modalIsVisible} toggleModal={toggleModal}>
         <label>Título</label>
         <Input
           placeholder="Título"
@@ -44,8 +38,24 @@ export default ({ lastNumberSelected }) => {
           onChange={e => setTitle(e.target.value)}
         />
 
-        <br/>
-        <br/>
+        <br />
+        <br />
+
+        <label>Voz: {currentVoice ? currentVoice.name : 'Desactivada'}</label>
+        <br />
+        <Dropdown
+          elementList={voices.map(voice => (
+            <button onClick={() => setCurrentVoice(voice)}>{voice.name}</button>
+          ))}
+        >
+          <Button type="primary">Cambiar narrador</Button>
+        </Dropdown>
+
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
 
         <Button
           round
